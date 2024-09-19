@@ -32,8 +32,8 @@ This Spring Boot application calculates the total payable amount on a retail bil
 
 ### Clone the repository
 
-git clone https://github.com/afrozk05/afroz-kazi-java-test.git
-cd afroz-kazi-java-test
+- git clone https://github.com/afrozk05/afroz-kazi-java-test.git
+- cd afroz-kazi-java-test
 
 
 ### Build the project
