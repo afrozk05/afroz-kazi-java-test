@@ -45,3 +45,18 @@ This is a simple Spring Boot application to calculate the total amount on a bill
 7. Code Coverage
    Go to project directory from command line interface and type mvn clean test. Report will be generated
    in target/site/jacoco/index.html
+
+8. Generate Test Report
+   Post running "mvn clean test" , test reports can be found in target/surefire-reports directory
+   of the project.
+
+9. Project execution output:
+   If the input is isEmployee=true and Products are 1 Laptop priced at 1000 dollars and 2 apples 
+   priced at 50 dollars, output will be 745.0
+   Step by Step Evaluation:
+  i) First total amount of non grocery item will be calculated (1000*1=1000) and percentage will
+     be applied according to isEmployee=true ie 30 percent which evaluates to 300. 
+     Then at totalBillAmount{(1000*1) + (50*2)}=1100 , for per 100 dollar 5 dollar discount will 
+     be given ie (1100/100)*5=55 . 
+  ii) Total discount= percentage discount + bulkDiscount =355
+  iii) Total payable amount = totalBillAmount - total discount= 1100 - 355 = 745
