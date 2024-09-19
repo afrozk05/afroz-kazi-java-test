@@ -121,7 +121,9 @@ mvn clean test
 
 ## Generate Test Reports
 
-- Post running "mvn clean test" , test reports can be found in target/surefire-reports directory
+mvn surefire-report:report-only
+
+- Post running above command, test reports can be found at location target/reports/surefire.html directory
    of the project.
 
    
