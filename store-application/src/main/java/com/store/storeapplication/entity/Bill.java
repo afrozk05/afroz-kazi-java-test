@@ -1,31 +1,27 @@
 package com.store.storeapplication.entity;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
+import java.util.List;
+
 public class Bill   {
 
-    private double billAmount;
-    private boolean isGroceryItem;
+    @NotEmpty
+    private List<Product> products;
+    @NotNull(message="User information cannot be null.")
+    private User user;
 
-    public boolean isGroceryItem() {
-        return isGroceryItem;
+    public Bill(List<Product> products, User user) {
+        this.products = products;
+        this.user = user;
     }
 
-    public void setGroceryItem(boolean groceryItem) {
-        isGroceryItem = groceryItem;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public double getBillAmount() {
-        return billAmount;
-    }
-
-    public void setBillAmount(double billAmount) {
-        this.billAmount = billAmount;
-    }
-
-    @Override
-    public String toString() {
-        return "Bill{" +
-                "billAmount=" + billAmount +
-                ", isGroceryItem=" + isGroceryItem +
-                '}';
+    public User getUser() {
+        return user;
     }
 }

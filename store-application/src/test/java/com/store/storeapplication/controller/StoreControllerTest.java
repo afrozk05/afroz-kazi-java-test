@@ -1,7 +1,7 @@
 package com.store.storeapplication.controller;
 
 import com.store.storeapplication.entity.Bill;
-import com.store.storeapplication.entity.TotalRequest;
+import com.store.storeapplication.entity.Product;
 import com.store.storeapplication.entity.User;
 import com.store.storeapplication.service.StoreService;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +10,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
+
+import java.time.LocalDate;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -28,20 +31,15 @@ public class StoreControllerTest {
         this.autoCloseable= MockitoAnnotations.openMocks(this);
     }
     @Test
-    void testCalculateTotalAmount() {
+    void testCalculateTotalAmountWithMixItems() {
         ResponseEntity<Double> response ;
-        StoreController controller = new StoreController(storeService);
-        TotalRequest totalRequest = new TotalRequest();
-        User user = new User();
-        user.setEmployee(true);
-        Bill bill = new Bill();
-        bill.setBillAmount(150.75);
-        bill.setGroceryItem(true);
-        totalRequest.setUser(user);
-        totalRequest.setBill(bill);
-        when(storeService.calculateTotalAmount(user,bill)).thenReturn(145.75);
-        response = controller.calculateTotalAmount(totalRequest);
-        assertEquals(145.75, response.getBody());
+        User user = new User(true,false,LocalDate.of(2023, 9, 19));
+        Product groceryItem = new Product("apple",  2, 50);
+        Product nonGroceryItem = new Product("Laptop",  1, 1000);
+        Bill bill = new Bill(Arrays.asList(groceryItem, nonGroceryItem), user);
+        when(storeService.calculateTotalAmount(bill)).thenReturn(745.0);
+        response = storeController.calculateTotalAmount(bill);
+        assertEquals(745.0, response.getBody());
         assertEquals(200, response.getStatusCode().value());
     }
 }

@@ -1,6 +1,7 @@
 package com.store.storeapplication.service;
 
 import com.store.storeapplication.entity.Bill;
+import com.store.storeapplication.entity.Product;
 import com.store.storeapplication.entity.User;
 import com.store.storeapplication.util.StoreUtil;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import java.time.LocalDate;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -27,16 +31,14 @@ public class StoreServiceImplTest {
     }
 
     @Test
-    void testCalculateTotalAmount(){
-        StoreServiceImpl storeServiceImpl = new StoreServiceImpl(storeUtil);
-        User user = new User();
-        user.setEmployee(true);
-        Bill bill = new Bill();
-        bill.setBillAmount(150.75);
-        bill.setGroceryItem(true);
-        when(storeUtil.getDiscountForUser(user, bill)).thenReturn(0.0);
-        when( storeUtil.calculateAmountPostDiscount(bill)).thenReturn(5.0);
-        Double expectedResult=storeServiceImpl.calculateTotalAmount(user,bill);
-        assertEquals(145.75,expectedResult);
+    void testCalculateTotalAmountForMixItem(){
+        User user = new User(true,false, LocalDate.of(2023, 9, 19));
+        Product groceryItem = new Product("banana",  2, 10);
+        Product nonGroceryItem = new Product("Laptop",  1, 1000);
+        Bill bill = new Bill(Arrays.asList(groceryItem, nonGroceryItem), user);
+        when(storeUtil.calculateTotalAmount(bill.getProducts())).thenReturn(1100.0);
+        when(storeUtil.calculateDiscount(1100, bill.getUser(), bill.getProducts())).thenReturn(355.0);
+        Double expectedResult=storeService.calculateTotalAmount(bill);
+        assertEquals(745,expectedResult);
     }
 }

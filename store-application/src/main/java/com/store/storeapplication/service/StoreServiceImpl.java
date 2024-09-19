@@ -1,7 +1,6 @@
 package com.store.storeapplication.service;
 
 import com.store.storeapplication.entity.Bill;
-import com.store.storeapplication.entity.User;
 import com.store.storeapplication.util.StoreUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +15,9 @@ private final StoreUtil storeUtil;
     }
 
 @Override
-    public Double calculateTotalAmount(User user, Bill bill) {
-        double discountForUser = storeUtil.getDiscountForUser(user, bill);//percentage discount
-        double discountOnHundredDollar = storeUtil.calculateAmountPostDiscount(bill);//additional disc on every $100
-        double totalDiscount = discountForUser + discountOnHundredDollar;
-
-        return bill.getBillAmount() - totalDiscount;
+    public Double calculateTotalAmount( Bill bill) {
+    double totalBillAmount =storeUtil.calculateTotalAmount(bill.getProducts());
+    double discount = storeUtil.calculateDiscount(totalBillAmount, bill.getUser(), bill.getProducts());
+    return totalBillAmount - discount;
     }
 }

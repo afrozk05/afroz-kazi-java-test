@@ -32,3 +32,11 @@ This is a simple Spring Boot application to calculate the total amount on a bill
 
 4. Run Tests:
    mvn test
+
+5. Approach Taken:
+   Three entities are defined. User, Product and Bill(user, List<Product>).
+   Discount calculation logic is such that first total price of product is 
+   calculated(price * quantity) , then nonGroceryItemTotal is checked, if it is non zero, 
+   Percentage calculation is applied, post that bulk discount is applied on total bill amount.
+   Total discount= percentage discount + bulk discount.
+   Have predefined grocery items as {"apple", "banana", "orange", "milk", "bread", "eggs", "cheese", "rice", "pasta"}

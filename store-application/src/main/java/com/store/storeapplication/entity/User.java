@@ -8,6 +8,11 @@ public class User {
     private boolean isAffliate;
     private LocalDate associationDate; //Date when user became associated with store
 
+    public User(boolean isEmployee, boolean isAffiliate, LocalDate associationDate) {
+        this.isEmployee = isEmployee;
+        this.isAffliate = isAffiliate;
+        this.associationDate = associationDate;
+    }
     public boolean isEmployee() {
         return isEmployee;
     }

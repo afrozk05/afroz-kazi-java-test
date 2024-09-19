@@ -1,6 +1,6 @@
 package com.store.storeapplication.controller;
 
-import com.store.storeapplication.entity.TotalRequest;
+import com.store.storeapplication.entity.Bill;
 import com.store.storeapplication.service.StoreService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +23,8 @@ public class StoreController {
         this.storeService = storeService;
     }
     @PostMapping
-    public ResponseEntity<Double> calculateTotalAmount(@Valid @RequestBody TotalRequest totalRequest) {
-        double totalAmount = storeService.calculateTotalAmount(totalRequest.getUser(),totalRequest.getBill());
+    public ResponseEntity<Double> calculateTotalAmount(@Valid @RequestBody Bill bill) {
+        double totalAmount = storeService.calculateTotalAmount(bill);
         return ResponseEntity.ok(totalAmount);
     }
 }
