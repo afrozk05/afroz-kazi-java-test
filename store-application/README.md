@@ -40,3 +40,7 @@ This is a simple Spring Boot application to calculate the total amount on a bill
    Percentage calculation is applied, post that bulk discount is applied on total bill amount.
    Total discount= percentage discount + bulk discount.
    Have predefined grocery items as {"apple", "banana", "orange", "milk", "bread", "eggs", "cheese", "rice", "pasta"}
+
+6. Code Coverage
+   Go to project directory from command line interface and type mvn clean test. Report will be generated
+   in target/site/index.html
