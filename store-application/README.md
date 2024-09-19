@@ -19,21 +19,22 @@ This is a simple Spring Boot application to calculate the total amount on a bill
 - Maven
 
 ### Installation
+1. Github link for application https://github.com/afrozk05/afroz-kazi-java-test/tree/main/store-application
 
-1. Clone the repository:
+2. Clone the repository:
    git clone https://github.com/afrozk05/afroz-kazi-java-test.git
    cd afroz-kazi-java-test
 
-2. Build the project:
+3. Build the project:
    mvn clean install
 
-3. Run the application:
+4. Run the application:
    mvn spring-boot:run
 
-4. Run Tests:
+5. Run Tests:
    mvn test
 
-5. Approach Taken:
+6. Approach Taken:
    Three entities are defined. User, Product and Bill(user, List<Product>).
    Discount calculation logic is such that first total price of product is 
    calculated(price * quantity) , then nonGroceryItemTotal is checked, if it is non zero, 
@@ -41,6 +42,6 @@ This is a simple Spring Boot application to calculate the total amount on a bill
    Total discount= percentage discount + bulk discount.
    Have predefined grocery items as {"apple", "banana", "orange", "milk", "bread", "eggs", "cheese", "rice", "pasta"}
 
-6. Code Coverage
+7. Code Coverage
    Go to project directory from command line interface and type mvn clean test. Report will be generated
-   in target/site/index.html
+   in target/site/jacoco/index.html
