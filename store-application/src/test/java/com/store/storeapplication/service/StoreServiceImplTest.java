@@ -10,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,7 +31,7 @@ public class StoreServiceImplTest {
 
     @Test
     void testCalculateTotalAmountForMixItem(){
-        User user = new User(true,false, LocalDate.of(2023, 9, 19));
+        User user = new User(101);
         Product groceryItem = new Product("banana",  2, 10);
         Product nonGroceryItem = new Product("Laptop",  1, 1000);
         Bill bill = new Bill(Arrays.asList(groceryItem, nonGroceryItem), user);

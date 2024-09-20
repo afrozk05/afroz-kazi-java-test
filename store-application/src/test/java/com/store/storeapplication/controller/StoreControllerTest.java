@@ -11,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -33,7 +32,7 @@ public class StoreControllerTest {
     @Test
     void testCalculateTotalAmountWithMixItems() {
         ResponseEntity<Double> response ;
-        User user = new User(true,false,LocalDate.of(2023, 9, 19));
+        User user = new User(101);
         Product groceryItem = new Product("apple",  2, 50);
         Product nonGroceryItem = new Product("Laptop",  1, 1000);
         Bill bill = new Bill(Arrays.asList(groceryItem, nonGroceryItem), user);

@@ -4,8 +4,6 @@ import com.store.storeapplication.entity.Product;
 import com.store.storeapplication.entity.User;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
 
 @Component
@@ -39,7 +37,7 @@ public class StoreUtil {
             percentage = 0.30;
         } else if (user.isAffliate()) {
             percentage = 0.10;
-        } else if (user.getAssociationDate()!=null && isUserAssociatedMoreThanTwoYears(user)) {
+        } else if (user.isLoyalCustomer()) {
             percentage = 0.05;
         }
 
@@ -48,12 +46,6 @@ public class StoreUtil {
 
     private double getBulkDiscount(double totalAmount) {
         return (totalAmount / 100) * 5;
-    }
-
-    private boolean isUserAssociatedMoreThanTwoYears(User user) {
-        LocalDate now = LocalDate.now();
-        Period period = Period.between(user.getAssociationDate(), now);
-        return period.getYears() > 2;
     }
 
 }

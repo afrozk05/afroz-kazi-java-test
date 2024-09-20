@@ -1,48 +1,53 @@
 package com.store.storeapplication.entity;
 
-import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotNull;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class User {
 
+    private static final List<Integer> EMPLOYEE_LIST = Arrays.asList(101, 103, 105, 107, 109, 111);
+    private static final List<Integer> AFFLIATE_LIST = Arrays.asList(102, 104, 108, 110, 112, 114);
+    private static final List<Integer> ASSOCIATED_CUST_LIST = Arrays.asList(115, 116, 117, 118, 119, 120);
+
+    @NotNull(message = "UserId cannot be null")
+    private Integer userId;
     private boolean isEmployee;
     private boolean isAffliate;
-    private LocalDate associationDate; //Date when user became associated with store
+    private boolean isLoyalCustomer;
 
-    public User(boolean isEmployee, boolean isAffiliate, LocalDate associationDate) {
-        this.isEmployee = isEmployee;
-        this.isAffliate = isAffiliate;
-        this.associationDate = associationDate;
+    @JsonCreator
+    public User(@JsonProperty("userId") Integer userId) {
+        this.userId = userId;
+        this.isEmployee = determineIfEmployee(userId);
+        this.isAffliate = determineIfAffliate(userId);
+        this.isLoyalCustomer = determineAssociatedCustomer(userId);
     }
+
     public boolean isEmployee() {
         return isEmployee;
-    }
-
-    public void setEmployee(boolean employee) {
-        isEmployee = employee;
     }
 
     public boolean isAffliate() {
         return isAffliate;
     }
 
-    public void setAffliate(boolean affliate) {
-        isAffliate = affliate;
+    public boolean isLoyalCustomer() {
+        return isLoyalCustomer;
     }
 
-    public LocalDate getAssociationDate() {
-        return associationDate;
+    private boolean determineAssociatedCustomer(int userId) {
+        return ASSOCIATED_CUST_LIST.contains(userId);
     }
 
-    public void setAssociationDate(LocalDate associationDate) {
-        this.associationDate = associationDate;
+    private boolean determineIfAffliate(int userId) {
+        return AFFLIATE_LIST.contains(userId);
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "isEmployee=" + isEmployee +
-                ", isAffliate=" + isAffliate +
-                ", associationDate=" + associationDate +
-                '}';
+    private boolean determineIfEmployee(int userId) {
+        return EMPLOYEE_LIST.contains(userId);
     }
 }
