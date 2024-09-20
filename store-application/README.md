@@ -23,7 +23,7 @@ This Spring Boot application calculates the total payable amount on a retail bil
 
 ### Prerequisites
 
-- Java 11 or later
+- Java 8 or later
 - Maven
 - Springboot
 
@@ -53,7 +53,7 @@ POST /store
 ```json
 {
   "user": {
-    "employee":true
+    "userId":101
   },
   "products":[
     {
@@ -76,9 +76,7 @@ POST /store
 #### Request Parameters
 
 - user
-  - isEmployee
-  - isAffliate
-  - associationDate
+  - userId
 - products
   - productName
   - quantity
@@ -110,8 +108,8 @@ Products are 1 Laptop priced at 1000 dollars and 2 apples priced at 50 dollars:
 - If the user is an employee and not an affliate or long-term customer, the discount will be:
   - 30% of $1000 = $300
   - Bulk discount: $5 (for $1100) = $55
-  - Total discount = $300 + $55 -$355
-  - Net Payable = $1100 - $355 - $5 = $745
+  - Total discount = $300 + $55 = $355
+  - Net Payable = $1100 - $355 = $745
 ## Run Tests and Code Coverage
 
 mvn clean test
@@ -135,4 +133,9 @@ mvn surefire-report:report-only
    - nonGroceryItemTotal is checked, if it is non zero, Percentage calculation is applied
    - bulk discount is applied on total bill amount
    - Total discount= percentage discount + bulk discount.
-- Have predefined grocery items as {"apple", "banana", "orange", "milk", "bread", "eggs", "cheese", "rice", "pasta"}
+- Have predefined 
+   - grocery items as {"apple", "banana", "orange", "milk", "bread", "eggs", "cheese", "rice", "pasta"}
+   - employee userId list as (101, 103, 105, 107, 109, 111)
+   - affiliate userId list as (102, 104, 108, 110, 112, 114)
+   - customer associated more than 2 years userId list as (115, 116, 117, 118, 119, 120)
+   - Above predefined values can be used as test data to test this application.
